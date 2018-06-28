@@ -230,7 +230,7 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
   end
 
   describe 'values filters' do
-    let(:augeas) { stub('augeas', match: %w[set of values]) }
+    let(:augeas) { stub('augeas', match: ['set', 'of', 'values']) }
 
     before(:each) do
       augeas.stubs(:get).returns('set').then.returns('of').then.returns('values')
@@ -280,7 +280,7 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
   end
 
   describe 'match filters' do
-    let(:augeas) { stub('augeas', match: %w[set of values]) }
+    let(:augeas) { stub('augeas', match: ['set', 'of', 'values']) }
 
     before(:each) do
       augeas.stubs('close')
@@ -351,7 +351,7 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
     end
 
     it 'handles no filters' do
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(true)
     end
 
@@ -424,13 +424,13 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
 
     it 'returns true when a match filter matches' do
       resource[:onlyif] = 'match path size == 3'
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(true)
     end
 
     it 'returns false when a match filter does not match' do
       resource[:onlyif] = 'match path size == 2'
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(false)
     end
 
@@ -438,21 +438,21 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
     it 'setting force should not change the above logic' do
       resource[:force] = true
       resource[:onlyif] = 'match path size == 2'
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(false)
     end
 
     # Ticket 5211 testing
     it 'returns true when a size != the provided value' do
       resource[:onlyif] = 'match path size != 17'
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(true)
     end
 
     # Ticket 5211 testing
     it 'returns false when a size does equal the provided value' do
       resource[:onlyif] = 'match path size != 3'
-      augeas.stubs('match').returns(%w[set of values])
+      augeas.stubs('match').returns(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(false)
     end
 
