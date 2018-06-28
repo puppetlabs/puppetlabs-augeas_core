@@ -22,6 +22,23 @@ describe provider_class do
     File.expand_path(File.join(File.dirname(__FILE__), '../../../fixtures/unit/provider/augeas/augeas'))
   end
 
+  def tmpfile(name)
+    Puppet::FileSystem.expand_path(make_tmpname(name, nil).encode(Encoding::UTF_8), Dir.tmpdir)
+  end
+
+  # Copied from ruby 2.4 source
+  def make_tmpname((prefix, suffix), n)
+    prefix = (String.try_convert(prefix) or
+              raise ArgumentError, "unexpected prefix: #{prefix.inspect}")
+    suffix &&= (String.try_convert(suffix) or
+                raise ArgumentError, "unexpected suffix: #{suffix.inspect}")
+    t = Time.now.strftime("%Y%m%d")
+    path = "#{prefix}#{t}-#{$$}-#{rand(0x100000000).to_s(36)}".dup
+    path << "-#{n}" if n
+    path << suffix if suffix
+    path
+  end
+
   describe "command parsing" do
     it "should break apart a single line into three tokens and clean up the context" do
       @resource[:context] = "/context"
@@ -821,8 +838,8 @@ describe provider_class do
     it "should not clobber the file if it's a symlink" do
       Puppet::Util::Storage.stubs(:store)
 
-      link = Tempfile.new('link')
-      target = Tempfile.new('target')
+      link = tmpfile('link')
+      target = tmpfile('target')
       FileUtils.touch(target)
       Puppet::FileSystem.symlink(target, link)
 
