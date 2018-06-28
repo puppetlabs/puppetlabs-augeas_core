@@ -46,3 +46,5 @@ Gemfile:
       - gem: beaker-puppet
         from_env: BEAKER_PUPPET_VERSION
         version: '~> 0.14'
+    ':development':
+      - gem: puppet-strings
