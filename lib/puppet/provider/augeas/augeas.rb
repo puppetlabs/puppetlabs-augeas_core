@@ -94,7 +94,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           nbracket = 0
           inSingleTick = false
           inDoubleTick = false
-          begin
+          loop do
             sc.skip(%r{([^\]\[\s\\'"]|\\.)+})
             ch = sc.getch
             nbracket += 1 if ch == '['
@@ -102,7 +102,8 @@ Puppet::Type.type(:augeas).provide(:augeas) do
             inSingleTick = !inSingleTick if ch == "'"
             inDoubleTick = !inDoubleTick if ch == '"'
             fail(_('unmatched [')) if nbracket < 0
-          end until ((nbracket == 0 && !inSingleTick && !inDoubleTick && (ch =~ %r{\s})) || sc.eos?)
+            break if (nbracket == 0 && !inSingleTick && !inDoubleTick && (ch =~ %r{\s})) || sc.eos?
+          end
           len = sc.pos - start
           len -= 1 unless sc.eos?
           p = sc.string[start, len]
