@@ -11,7 +11,7 @@ test_name 'Augeas hosts file' do
     'windows',
     'cisco_ios', # PUP-7380
   ]
-  confine :to, {}, hosts.reject { |host| host[:roles].include?('master') }
+  confine(:to, {}, hosts.reject { |host| host[:roles].include?('master') })
 
   step 'Backup the hosts file' do
     on hosts, 'cp /etc/hosts /tmp/hosts.bak'

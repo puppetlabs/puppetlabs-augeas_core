@@ -52,12 +52,12 @@ Puppet::Type.newtype(:augeas) do
 
   EOT
 
-  newparam (:name) do
+  newparam(:name) do
     desc 'The name of this task. Used for uniqueness.'
     isnamevar
   end
 
-  newparam (:context) do
+  newparam(:context) do
     desc "Optional context path. This value is prepended to the paths of all
       changes if the path is relative. If the `incl` parameter is set,
       defaults to `/files + incl`; otherwise, defaults to the empty string."
@@ -71,7 +71,7 @@ Puppet::Type.newtype(:augeas) do
     end
   end
 
-  newparam (:onlyif) do
+  newparam(:onlyif) do
     desc "Optional augeas command and comparisons to control the execution of this type.
 
       Note: `values` is not an actual augeas API command. It calls `match` to retrieve an array of paths

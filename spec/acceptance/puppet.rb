@@ -7,7 +7,7 @@ test_name 'Augeas puppet configuration' do
   skip_test 'requires augeas which is included in AIO' if @options[:type] != 'aio'
 
   confine :except, platform: 'windows'
-  confine :to, {}, hosts.reject { |host| host[:roles].include?('master') }
+  confine(:to, {}, hosts.reject { |host| host[:roles].include?('master') })
 
   teardown do
     agents.each do |agent|

@@ -9,7 +9,7 @@ test_name 'Augeas services file' do
 
   confine :except, platform: 'windows'
   confine :except, platform: 'osx'
-  confine :to, {}, hosts.reject { |host| host[:roles].include?('master') }
+  confine(:to, {}, hosts.reject { |host| host[:roles].include?('master') })
 
   step 'Backup the services file' do
     on hosts, 'cp /etc/services /tmp/services.bak'

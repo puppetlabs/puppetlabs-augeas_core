@@ -105,9 +105,9 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           end until ((nbracket == 0 && !inSingleTick && !inDoubleTick && (ch =~ %r{\s})) || sc.eos?)
           len = sc.pos - start
           len -= 1 unless sc.eos?
-          unless p = sc.string[start, len]
-            fail(_('missing path argument %{narg} for %{cmd}') % { narg: narg, cmd: cmd })
-          end
+          p = sc.string[start, len]
+          fail(_('missing path argument %{narg} for %{cmd}') % { narg: narg, cmd: cmd }) if p.nil?
+
           # Rip off any ticks if they are there.
           p = p[1, (p.size - 2)] if p[0, 1] == "'" || p[0, 1] == '"'
           p.chomp!('/')
@@ -180,7 +180,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
       elsif glob_avail && opt_ctx
         # Optimize loading if the context is given, requires the glob function
         # from Augeas 0.8.2 or up
-        ctx_path = resource[:context].sub(/^\/files(.*?)\/?$/, '\1/')
+        ctx_path = resource[:context].sub(%r{^/files(.*?)/?$}, '\1/')
         load_path = "/augeas/load/*['%s' !~ glob(incl) + regexp('/.*')]" % ctx_path
 
         if aug.match(load_path).size < aug.match('/augeas/load/*').size
@@ -198,11 +198,11 @@ Puppet::Type.type(:augeas).provide(:augeas) do
   end
 
   def close_augeas
-    if @aug
-      @aug.close
-      debug('Closed the augeas connection')
-      @aug = nil
-    end
+    return if @aug.nil?
+
+    @aug.close
+    debug('Closed the augeas connection')
+    @aug = nil
   end
 
   def is_numeric?(s)
@@ -444,8 +444,8 @@ Puppet::Type.type(:augeas).provide(:augeas) do
 
           saved_files = @aug.match('/augeas/events/saved')
           if !saved_files.empty?
-            root = resource[:root].sub(/^\/$/, '')
-            saved_files.map! { |key| @aug.get(key).sub(/^\/files/, root) }
+            root = resource[:root].sub(%r{^/$}, '')
+            saved_files.map! { |key| @aug.get(key).sub(%r{^/files}, root) }
             saved_files.uniq.each do |saved_file|
               if Puppet[:show_diff] && @resource[:show_diff]
                 send(@resource[:loglevel], "\n" + diff(saved_file, saved_file + '.augnew'))
@@ -490,6 +490,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
   end
 
   # Actually execute the augeas changes.
+  # rubocop:disable Style/GuardClause
   def do_execute_changes
     commands = parse_commands(resource[:changes])
     commands.each do |cmd_array|
@@ -568,4 +569,5 @@ Puppet::Type.type(:augeas).provide(:augeas) do
       end
     end
   end
+  # rubocop:enable Style/GuardClause
 end
