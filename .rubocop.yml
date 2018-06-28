@@ -16,6 +16,7 @@ AllCops:
 Metrics/LineLength:
   Description: People have wide screens, use them.
   Max: 200
+  Enabled: false
 RSpec/BeforeAfterAll:
   Description: Beware of using after(:all) as it may cause state to leak between tests.
     A necessary evil in acceptance testing.
@@ -63,6 +64,24 @@ Style/TrailingCommaInLiteral:
 Style/SymbolArray:
   Description: Using percent style obscures symbolic intent of array's contents.
   EnforcedStyle: brackets
+Style/SignalException:
+  Enabled: false
+Layout/IndentHeredoc:
+  Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
+Style/AccessorMethodName:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/MultipleComparison:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/PredicateName:
+  Enabled: false
+Style/VariableName:
+  Enabled: false
 RSpec/MessageSpies:
   EnforcedStyle: receive
 Style/CollectionMethods:
