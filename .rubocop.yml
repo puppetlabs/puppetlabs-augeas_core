@@ -73,13 +73,19 @@ Style/StringMethods:
   Enabled: true
 Layout/EndOfLine:
   Enabled: false
+Layout/IndentHeredoc:
+  Enabled: false
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
+Metrics/BlockNesting:
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/LineLength:
   Enabled: false
 Metrics/MethodLength:
   Enabled: false
@@ -99,9 +105,23 @@ RSpec/MultipleExpectations:
   Enabled: false
 RSpec/NestedGroups:
   Enabled: false
+Style/AccessorMethodName:
+  Enabled: false
 Style/AsciiComments:
+  Enabled: false
+Style/DoubleNegation:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false
+Style/MultipleComparison:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/PredicateName:
+  Enabled: false
 Style/SymbolProc:
+  Enabled: false
+Style/SignalException:
+  Enabled: false
+Style/VariableName:
   Enabled: false

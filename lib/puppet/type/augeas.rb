@@ -18,9 +18,9 @@ require 'puppet/parameter/boolean'
 Puppet::Type.newtype(:augeas) do
   include Puppet::Util
 
-  feature :parse_commands, "Parse the command string"
-  feature :need_to_run?, "If the command should run"
-  feature :execute_changes, "Actually make the changes"
+  feature :parse_commands, 'Parse the command string'
+  feature :need_to_run?, 'If the command should run'
+  feature :execute_changes, 'Actually make the changes'
 
   @doc = <<-'EOT'
     Apply a change or an array of changes to the filesystem
@@ -53,7 +53,7 @@ Puppet::Type.newtype(:augeas) do
   EOT
 
   newparam (:name) do
-    desc "The name of this task. Used for uniqueness."
+    desc 'The name of this task. Used for uniqueness.'
     isnamevar
   end
 
@@ -61,10 +61,10 @@ Puppet::Type.newtype(:augeas) do
     desc "Optional context path. This value is prepended to the paths of all
       changes if the path is relative. If the `incl` parameter is set,
       defaults to `/files + incl`; otherwise, defaults to the empty string."
-    defaultto ""
+    defaultto ''
     munge do |value|
-      if value.empty? and resource[:incl]
-        "/files" + resource[:incl]
+      if value.empty? && resource[:incl]
+        '/files' + resource[:incl]
       else
         value
       end
@@ -98,9 +98,8 @@ Puppet::Type.newtype(:augeas) do
       * `STRING` is a string
       * `INT` is a number
       * `AN_ARRAY` is in the form `['a string', 'another']`"
-    defaultto ""
+    defaultto ''
   end
-
 
   newparam(:changes) do
     desc "The changes which should be applied to the filesystem. This
@@ -124,15 +123,14 @@ Puppet::Type.newtype(:augeas) do
     If the `context` parameter is set, that value is prepended to any relative `PATH`s."
   end
 
-
   newparam(:root) do
-    desc "A file system path; all files loaded by Augeas are loaded underneath `root`."
-    defaultto "/"
+    desc 'A file system path; all files loaded by Augeas are loaded underneath `root`.'
+    defaultto '/'
   end
 
   newparam(:load_path) do
     desc "Optional colon-separated list or array of directories; these directories are searched for schema definitions. The agent's `$libdir/augeas/lenses` path will always be added to support pluginsync."
-    defaultto ""
+    defaultto ''
   end
 
   newparam(:force) do
@@ -143,7 +141,7 @@ Puppet::Type.newtype(:augeas) do
   end
 
   newparam(:type_check) do
-    desc "Whether augeas should perform typechecking. Defaults to false."
+    desc 'Whether augeas should perform typechecking. Defaults to false.'
     newvalues(:true, :false)
 
     defaultto :false
@@ -164,10 +162,10 @@ Puppet::Type.newtype(:augeas) do
   validate do
     has_lens = !self[:lens].nil?
     has_incl = !self[:incl].nil?
-    self.fail _("You must specify both the lens and incl parameters, or neither.") if has_lens != has_incl
+    fail(_('You must specify both the lens and incl parameters, or neither.')) if has_lens != has_incl
   end
 
-  newparam(:show_diff, :boolean => true, :parent => Puppet::Parameter::Boolean) do
+  newparam(:show_diff, boolean: true, parent: Puppet::Parameter::Boolean) do
     desc "Whether to display differences when the file changes, defaulting to
         true.  This parameter is useful for files that may contain passwords or
         other secret data, which might otherwise be included in Puppet reports or
@@ -180,22 +178,22 @@ Puppet::Type.newtype(:augeas) do
   # This is the actual meat of the code. It forces
   # augeas to be run and fails or not based on the augeas return
   # code.
-  newproperty(:returns) do |property|
+  newproperty(:returns) do |_property|
     include Puppet::Util
-    desc "The expected return code from the augeas command. Should not be set."
+    desc 'The expected return code from the augeas command. Should not be set.'
 
     defaultto 0
 
     # Make output a bit prettier
-    def change_to_s(currentvalue, newvalue)
-      _("executed successfully")
+    def change_to_s(_currentvalue, _newvalue)
+      _('executed successfully')
     end
 
     # if the onlyif resource is provided, then the value is parsed.
     # a return value of 0 will stop execution because it matches the
     # default value.
     def retrieve
-      if @resource.provider.need_to_run?()
+      if @resource.provider.need_to_run?
         :need_to_run
       else
         0
@@ -207,5 +205,4 @@ Puppet::Type.newtype(:augeas) do
       @resource.provider.execute_changes
     end
   end
-
 end
