@@ -18,6 +18,7 @@ require 'strscan'
 require 'puppet/util'
 require 'puppet/util/diff'
 require 'puppet/util/package'
+require 'json'
 
 Puppet::Type.type(:augeas).provide(:augeas) do
   include Puppet::Util
@@ -280,7 +281,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     when '=='
       begin
         arg = clause_array.shift
-        new_array = eval arg
+        new_array = to_array(arg)
         return_value = (values == new_array)
       rescue
         fail(_('Invalid array in command: %{cmd}') % { cmd: cmd_array.join(' ') })
@@ -288,7 +289,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     when '!='
       begin
         arg = clause_array.shift
-        new_array = eval arg
+        new_array = to_array(arg)
         return_value = (values != new_array)
       rescue
         fail(_('Invalid array in command: %{cmd}') % { cmd: cmd_array.join(' ') })
@@ -336,7 +337,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     when '=='
       begin
         arg = clause_array.shift
-        new_array = eval arg
+        new_array = to_array(arg)
         return_value = (result == new_array)
       rescue
         fail(_('Invalid array in command: %{cmd}') % { cmd: cmd_array.join(' ') })
@@ -344,7 +345,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     when '!='
       begin
         arg = clause_array.shift
-        new_array = eval arg
+        new_array = to_array(arg)
         return_value = (result != new_array)
       rescue
         fail(_('Invalid array in command: %{cmd}') % { cmd: cmd_array.join(' ') })
@@ -571,4 +572,9 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     end
   end
   # rubocop:enable Style/GuardClause
+
+  def to_array(string)
+    JSON.parse(string.tr("'", '"'))
+  end
+  private :to_array
 end
