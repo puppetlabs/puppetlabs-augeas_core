@@ -57,7 +57,7 @@ To generate documentation locally, run
 bundle install
 bundle exec puppet strings generate ./lib/**/*.rb
 ```
-This command will create a browsable `\_index.html` file in the `doc` directory. The references available here are all generated from YARD-style comments embedded in the code base. When any development happens on this module, the impacted documentation should also be updated.
+This command will create a browsable `_index.html` file in the `doc` directory. The references available here are all generated from YARD-style comments embedded in the code base. When any development happens on this module, the impacted documentation should also be updated.
 
 ## Limitations
 
