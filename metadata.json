@@ -2,9 +2,11 @@
   "name": "puppetlabs-augeas_core",
   "version": "0.1.0",
   "author": "Puppet Labs",
-  "summary": "",
+  "summary": "Manage files using Augeas",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/puppetlabs/puppetlabs-augeas_core",
+  "project_page": "https://puppet.com/docs/puppet/latest/types/augeas.html",
+  "issues_url": "https://tickets.puppetlabs.com/projects/MODULES",
   "dependencies": [
 
   ],
