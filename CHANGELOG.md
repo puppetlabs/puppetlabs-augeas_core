@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ## [1.0.1] - 2018-08-15
 ### Added
 - (MODULE-7443) Safely deserialize stringified array
+- (PUP-9053) Enable localization
 ### Changed
 - (maint) Move array parser logic into a util module
 - (maint) Update beaker-puppet version to 0.16
