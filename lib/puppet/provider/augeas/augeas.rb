@@ -442,7 +442,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           save_result = @aug.save
           unless save_result
             print_put_errors
-            fail(_('Saving failed, see debug'))
+            fail(_('Save failed, see debug output for details'))
           end
 
           saved_files = @aug.match('/augeas/events/saved')
@@ -484,7 +484,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     do_execute_changes
     unless @aug.save
       print_put_errors
-      fail(_('Save failed, see debug'))
+      fail(_('Save failed, see debug output for details'))
     end
 
     :executed
