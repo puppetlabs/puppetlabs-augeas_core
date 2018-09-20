@@ -6,11 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: puppetlabs-augeas_core 1.0.0-11-g6df0e15\n"
-"\n"
+"Project-Id-Version: puppetlabs-augeas_core \n"
 "Report-Msgid-Bugs-To: docs@puppet.com\n"
-"POT-Creation-Date: 2018-08-16 08:55-0700\n"
-"PO-Revision-Date: 2018-08-16 08:55-0700\n"
+"POT-Creation-Date: 2018-09-20 19:58+0000\n"
+"PO-Revision-Date: 2018-09-20 19:58+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -63,12 +62,8 @@ msgstr ""
 msgid "Error sending command '%{command}' with params %{param}/%{message}"
 msgstr ""
 
-#: ../lib/puppet/provider/augeas/augeas.rb:445
-msgid "Saving failed, see debug"
-msgstr ""
-
-#: ../lib/puppet/provider/augeas/augeas.rb:487
-msgid "Save failed, see debug"
+#: ../lib/puppet/provider/augeas/augeas.rb:445 ../lib/puppet/provider/augeas/augeas.rb:487
+msgid "Save failed, see debug output for details"
 msgstr ""
 
 #: ../lib/puppet/provider/augeas/augeas.rb:500
