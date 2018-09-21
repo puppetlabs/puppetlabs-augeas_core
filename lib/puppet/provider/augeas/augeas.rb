@@ -79,8 +79,9 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     data = data.flatten
     args = []
     data.each do |line|
+      next if line.nil?
       line.strip!
-      next if line.nil? || line.empty?
+      next if line.empty?
       argline = []
       sc = StringScanner.new(line)
       cmd = sc.scan(%r{\w+|==|!=})
