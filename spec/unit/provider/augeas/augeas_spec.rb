@@ -46,6 +46,16 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
   end
 
   describe 'command parsing' do
+    it 'ignores nil values when parsing commands' do
+      commands = [nil, 'set Jar/Jar Binks']
+      tokens = provider.parse_commands(commands)
+      expect(tokens.size).to eq(1)
+      expect(tokens[0].size).to eq(3)
+      expect(tokens[0][0]).to eq('set')
+      expect(tokens[0][1]).to eq('Jar/Jar')
+      expect(tokens[0][2]).to eq('Binks')
+    end
+
     it 'breaks apart a single line into three tokens and clean up the context' do
       resource[:context] = '/context'
       tokens = provider.parse_commands('set Jar/Jar Binks')
