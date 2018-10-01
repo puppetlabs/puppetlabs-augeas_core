@@ -18,7 +18,7 @@ require 'strscan'
 require 'puppet/util'
 require 'puppet/util/diff'
 require 'puppet/util/package'
-require 'puppet_x/augeas/util/parser'
+require_relative '../../../puppet_x/augeas/util/parser'
 
 Puppet::Type.type(:augeas).provide(:augeas) do
   include Puppet::Util
