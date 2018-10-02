@@ -1,6 +1,6 @@
 {
   "name": "puppetlabs-augeas_core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Puppet Labs",
   "summary": "Manage files using Augeas",
   "license": "Apache-2.0",
