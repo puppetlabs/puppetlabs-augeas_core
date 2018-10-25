@@ -14,7 +14,7 @@
 
 ## Description
 
-The augeas_core module is used to manage configuration files using Augeas. The module is suitable for any host for which there are Augeas libraries and ruby bindings.
+The `augeas_core` module is used to manage configuration files using Augeas. This module is suitable for any host for which there are Augeas libraries and ruby bindings.
 
 ## Setup
 
@@ -24,7 +24,7 @@ The augeas libraries and ruby bindings must be installed in order to use this mo
 
 ### Beginning with augeas_core
 
-To manage a configuration file using `augeas`:
+To manage a configuration file using `augeas`, use the following code:
 
 ```
 augeas { 'add_services_entry':
@@ -52,7 +52,7 @@ This module is documented using Puppet Strings.
 
 For a quick primer on how Strings works, please see [this blog post](https://puppet.com/blog/using-puppet-strings-generate-great-documentation-puppet-modules) or the [README.md](https://github.com/puppetlabs/puppet-strings/blob/master/README.md) for Puppet Strings.
 
-To generate documentation locally, run
+To generate documentation locally, run the following command:
 ```
 bundle install
 bundle exec puppet strings generate ./lib/**/*.rb
