@@ -42,11 +42,11 @@ augeas { 'add_services_entry':
 
 ## Usage
 
-For details on usage, please see [the augeas puppet docs](https://puppet.com/docs/puppet/latest/types/augeas.html) and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html).
+For details on usage, please see the [reference documentation](REFERENCE.md) and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html).
 
 ## Reference
 
-Please see REFERENCE.md for the reference documentation.
+Please see [`REFERENCE.md`](REFERENCE.md) for the reference documentation.
 
 This module is documented using Puppet Strings.
 
