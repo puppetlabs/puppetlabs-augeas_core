@@ -6,22 +6,26 @@
 1. [Description](#description)
 2. [Setup - The basics of getting started with augeas_core](#setup)
     * [Setup requirements](#setup-requirements)
-    * [Beginning with augeas_core](#beginning-with-augeas_core)
+    * [Beginning with augeas_core](#beginning-with-augeas)
 3. [Usage - Configuration options and additional functionality](#usage)
 4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
+<a id="description"></a>
 ## Description
 
 The `augeas_core` module is used to manage configuration files using Augeas. This module is suitable for any host for which there are Augeas libraries and ruby bindings.
 
+<a id="setup"></a>
 ## Setup
 
+<a id="setup-requirements"></a>
 ### Setup Requirements
 
 The augeas libraries and ruby bindings must be installed in order to use this module. If you are using `puppet-agent` packages, then those prerequisites are already satisfied for most platforms.
 
+<a id="beginning-with-augeas"></a>
 ### Beginning with augeas_core
 
 To manage a configuration file using `augeas`, use the following code:
@@ -40,13 +44,15 @@ augeas { 'add_services_entry':
 }
 ```
 
+<a id="usage"></a>
 ## Usage
 
-For details on usage, please see the [reference documentation](REFERENCE.md) and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html).
+Please see REFERENCE.md for the reference documentation and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html) for details on usage.
 
+<a id="reference"></a>
 ## Reference
 
-Please see [`REFERENCE.md`](REFERENCE.md) for the reference documentation.
+Please see REFERENCE.md for the reference documentation.
 
 This module is documented using Puppet Strings.
 
@@ -59,10 +65,12 @@ bundle exec puppet strings generate ./lib/**/*.rb
 ```
 This command will create a browsable `_index.html` file in the `doc` directory. The references available here are all generated from YARD-style comments embedded in the code base. When any development happens on this module, the impacted documentation should also be updated.
 
+<a id="limitations"></a>
 ## Limitations
 
 This module is only available on platforms that have augeas libraries and ruby bindings installed.
 
+<a id="development"></a>
 ## Development
 
 Puppet Labs modules on the Puppet Forge are open projects, and community contributions are essential for keeping them great. We can't access the huge number of platforms and myriad of hardware, software, and deployment configurations that Puppet is intended to serve.
