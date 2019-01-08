@@ -47,7 +47,7 @@ augeas { 'add_services_entry':
 <a id="usage"></a>
 ## 使用
 
-利用方法の詳細については、[augeas puppetドキュメント](https://puppet.com/docs/puppet/latest/types/augeas.html)および[例](https://puppet.com/docs/puppet/latest/resources_augeas.html)を参照してください。
+参考文書についてはREFERENCE.mdを、使用法の詳細については[例](https://puppet.com/docs/puppet/latest/resources_augeas.html)を参照してください。
 
 <a id="reference"></a>
 ## リファレンス
