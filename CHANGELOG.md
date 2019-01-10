@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.0.4] - 2019-01-10
+### Added
+- Add Japanese translations
+
 ## [1.0.3] - 2018-10-02
 ### Changed
 - (MODULES-8014) relatively require helper code
@@ -26,6 +30,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 ### Summary
 This is the initial release of the extracted augeas module
 
+[1.0.4]: https://github.com/puppetlabs/puppetlabs-augeas_core/compare/1.0.3...1.0.4
 [1.0.3]: https://github.com/puppetlabs/puppetlabs-augeas_core/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/puppetlabs/puppetlabs-augeas_core/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/puppetlabs/puppetlabs-augeas_core/compare/1.0.0...1.0.1
