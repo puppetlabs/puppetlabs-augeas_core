@@ -54,3 +54,6 @@ Gemfile:
         version: '~> 0.16'
     ':development':
       - gem: puppet-strings
+
+Rakefile:
+  changelog_version_tag_pattern: '%s'
