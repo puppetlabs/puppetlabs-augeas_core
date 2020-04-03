@@ -6,7 +6,7 @@
       Enabled: false
     Metrics/BlockNesting:
       Enabled: false
-    Metrics/LineLength:
+    Layout/LineLength:
       Enabled: false
     Style/AccessorMethodName:
       Enabled: false
