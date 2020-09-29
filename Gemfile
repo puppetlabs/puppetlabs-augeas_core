@@ -40,6 +40,7 @@ end
 group :system_tests do
   gem "puppet-module-posix-system-r#{minor_version}",                            require: false, platforms: [:ruby]
   gem "puppet-module-win-system-r#{minor_version}",                              require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "puppet-blacksmith", '~> 3.4',                                             require: false
   gem "beaker", *location_for(ENV['BEAKER_VERSION'] || '~> 4')
   gem "beaker-abs", *location_for(ENV['BEAKER_ABS_VERSION'] || '~> 0.5')
   gem "beaker-pe",                                                               require: false
