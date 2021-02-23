@@ -1124,7 +1124,7 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
     context 'when running application is agent' do
       before(:each) do
         Puppet[:libdir] = my_fixture_dir
-        Puppet::Application.stubs(:name).returns(:agent)
+        Puppet.run_mode.stubs(:name).returns(:agent)
       end
 
       it 'offers pluginsync augeas/lenses subdir' do
@@ -1139,7 +1139,7 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
 
     context 'when running application is not agent' do
       before(:each) do
-        Puppet::Application.stubs(:name).returns(:apply)
+        Puppet.run_mode.stubs(:name).returns(:user)
 
         env = Puppet::Node::Environment.create('root', ['/modules/foobar'])
         Puppet.stubs(:lookup).returns(env)
