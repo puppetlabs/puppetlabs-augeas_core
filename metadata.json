@@ -12,56 +12,25 @@
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystem": "CentOS"
     },
     {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystem": "OracleLinux"
     },
     {
-      "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystem": "RedHat"
     },
     {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystem": "Scientific"
     },
     {
-      "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "8",
-        "9",
-        "10"
-      ]
+      "operatingsystem": "Debian"
     },
     {
-      "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "16.04",
-        "18.04",
-        "20.04"
-      ]
+      "operatingsystem": "Ubuntu"
     },
     {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "30",
-        "31",
-        "32"
-      ]
+      "operatingsystem": "Fedora"
     }
   ],
   "requirements": [
