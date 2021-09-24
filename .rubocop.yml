@@ -73,7 +73,7 @@ Style/SymbolArray:
   EnforcedStyle: brackets
 Style/SignalException:
   Enabled: false
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
 Metrics/BlockNesting:
   Enabled: false
@@ -89,7 +89,7 @@ Style/NumericPredicate:
   Enabled: false
 Style/PredicateName:
   Enabled: false
-Style/VariableName:
+RSpec/VariableName:
   Enabled: false
 RSpec/MessageSpies:
   EnforcedStyle: receive

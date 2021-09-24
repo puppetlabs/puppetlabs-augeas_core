@@ -95,17 +95,17 @@ Puppet::Type.type(:augeas).provide(:augeas) do
         if f == :path
           start = sc.pos
           nbracket = 0
-          inSingleTick = false
-          inDoubleTick = false
+          in_single_tick = false
+          in_double_tick = false
           loop do
             sc.skip(%r{([^\]\[\s\\'"]|\\.)+})
             ch = sc.getch
             nbracket += 1 if ch == '['
             nbracket -= 1 if ch == ']'
-            inSingleTick = !inSingleTick if ch == "'"
-            inDoubleTick = !inDoubleTick if ch == '"'
+            in_single_tick = !in_single_tick if ch == "'"
+            in_double_tick = !in_double_tick if ch == '"'
             raise(_('unmatched [')) if nbracket < 0
-            break if (nbracket == 0 && !inSingleTick && !inDoubleTick && (ch =~ %r{\s})) || sc.eos?
+            break if (nbracket == 0 && !in_single_tick && !in_double_tick && (ch =~ %r{\s})) || sc.eos?
           end
           len = sc.pos - start
           len -= 1 unless sc.eos?
@@ -209,7 +209,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     @aug = nil
   end
 
-  def is_numeric?(s)
+  def numeric?(s)
     case s
     when Integer
       true
@@ -236,8 +236,8 @@ Puppet::Type.type(:augeas).provide(:augeas) do
     # check the value in augeas
     result = @aug.get(path) || ''
 
-    if ['<', '<=', '>=', '>'].include?(comparator) && is_numeric?(result) &&
-       is_numeric?(arg)
+    if ['<', '<=', '>=', '>'].include?(comparator) && numeric?(result) &&
+       numeric?(arg)
       resultf = result.to_f
       argf = arg.to_f
       return_value = resultf.send(comparator, argf)

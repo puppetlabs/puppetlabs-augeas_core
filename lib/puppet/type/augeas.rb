@@ -129,7 +129,8 @@ Puppet::Type.newtype(:augeas) do
   end
 
   newparam(:load_path) do
-    desc "Optional colon-separated list or array of directories; these directories are searched for schema definitions. The agent's `$libdir/augeas/lenses` path will always be added to support pluginsync."
+    desc "Optional colon-separated list or array of directories; these directories are searched for schema definitions.
+    The agent's `$libdir/augeas/lenses` path will always be added to support pluginsync."
     defaultto ''
   end
 

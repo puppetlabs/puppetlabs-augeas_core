@@ -475,19 +475,19 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
     end
     describe 'performing is_numeric checks (#22617)' do
       it 'returns false for nil' do
-        expect(provider.is_numeric?(nil)).to eq(false)
+        expect(provider.numeric?(nil)).to eq(false)
       end
       it 'returns true for Integers' do
-        expect(provider.is_numeric?(9)).to eq(true)
+        expect(provider.numeric?(9)).to eq(true)
       end
       it 'returns true for numbers in Strings' do
-        expect(provider.is_numeric?('9')).to eq(true)
+        expect(provider.numeric?('9')).to eq(true)
       end
       it 'returns false for non-number Strings' do
-        expect(provider.is_numeric?('x9')).to eq(false)
+        expect(provider.numeric?('x9')).to eq(false)
       end
       it 'returns false for other types' do
-        expect(provider.is_numeric?([true])).to eq(false)
+        expect(provider.numeric?([true])).to eq(false)
       end
     end
 
