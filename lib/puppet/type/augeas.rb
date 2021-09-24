@@ -162,7 +162,7 @@ Puppet::Type.newtype(:augeas) do
   validate do
     has_lens = !self[:lens].nil?
     has_incl = !self[:incl].nil?
-    fail(_('You must specify both the lens and incl parameters, or neither.')) if has_lens != has_incl
+    raise(Puppet::Error, _('You must specify both the lens and incl parameters, or neither.')) if has_lens != has_incl
   end
 
   newparam(:show_diff, boolean: true, parent: Puppet::Parameter::Boolean) do
