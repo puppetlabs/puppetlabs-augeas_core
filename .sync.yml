@@ -2,25 +2,25 @@
   default_configs:
     Style/SignalException:
       Enabled: false
-    Layout/IndentHeredoc:
-      Enabled: false
-    Metrics/BlockNesting:
-      Enabled: false
-    Metrics/LineLength:
-      Enabled: false
-    Style/AccessorMethodName:
-      Enabled: false
     Style/DoubleNegation:
       Enabled: false
     Style/MultipleComparison:
       Enabled: false
     Style/NumericPredicate:
       Enabled: false
-    Style/PredicateName:
-      Enabled: false
     Style/SignalException:
       Enabled: false
-    Style/VariableName:
+    Layout/HeredocIndentation:
+      Enabled: false
+    Layout/LineLength:
+      Enabled: false
+    Metrics/BlockNesting:
+      Enabled: false
+    Naming/AccessorMethodName:
+      Enabled: false
+    Naming/PredicateName:
+      Enabled: false
+    RSpec/VariableName:
       Enabled: false
 Gemfile:
   optional:
