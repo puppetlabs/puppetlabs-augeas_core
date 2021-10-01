@@ -54,6 +54,3 @@ appveyor.yml:
   unmanaged: false
 .gitlab-ci.yml:
   delete: true
-
-Rakefile:
-  changelog_version_tag_pattern: '%s'
