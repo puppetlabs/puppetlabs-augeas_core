@@ -40,6 +40,8 @@ Gemfile:
         from_env: BEAKER_PUPPET_VERSION
         version: '~> 1.22'
       - gem: github_changelog_generator
+      - gem: async
+        version: '~> 1'
       - gem: beaker-module_install_helper
       - gem: beaker-puppet_install_helper
       - gem: nokogiri
