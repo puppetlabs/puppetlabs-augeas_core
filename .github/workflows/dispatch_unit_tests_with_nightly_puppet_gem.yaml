@@ -72,13 +72,13 @@ jobs:
     
     strategy:
       matrix:
-        os: [ 'ubuntu-18.04', 'macos-10.15', 'windows-2019' ]
+        os: [ 'ubuntu-18.04', 'macos-latest', 'windows-2019' ]
         include:
           - os: 'ubuntu-18.04'
             os_type: 'Linux'
             env_set_cmd: 'export '
             gem_file_postfix: '.gem'
-          - os: 'macos-10.15'
+          - os: 'macos-latest'
             os_type: 'macOS'
             env_set_cmd: 'export '
             gem_file_postfix: '-universal-darwin.gem'
