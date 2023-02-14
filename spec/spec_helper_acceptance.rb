@@ -1,6 +1,7 @@
 require 'beaker-rspec'
 require 'beaker/module_install_helper'
 require 'beaker/puppet_install_helper'
+require 'voxpupuli/acceptance/spec_helper_acceptance'
 
 RSpec.configure do |c|
   c.before :suite do
