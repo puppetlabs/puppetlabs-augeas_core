@@ -72,9 +72,9 @@ jobs:
     
     strategy:
       matrix:
-        os: [ 'ubuntu-18.04', 'macos-latest', 'windows-2019' ]
+        os: [ 'ubuntu-20.04', 'macos-latest', 'windows-2019' ]
         include:
-          - os: 'ubuntu-18.04'
+          - os: 'ubuntu-20.04'
             os_type: 'Linux'
             env_set_cmd: 'export '
             gem_file_postfix: '.gem'
@@ -90,7 +90,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install ruby version ${{ env.ruby_version }}
         uses: ruby/setup-ruby@v1
