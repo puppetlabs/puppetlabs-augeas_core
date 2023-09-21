@@ -5,17 +5,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v1.4.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.4.0) - 2023-09-15
+## [v1.4.1](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.4.1) - 2023-09-21
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.4.0...v1.4.1)
+
+## [v1.4.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.4.0) - 2023-09-18
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.3.0...v1.4.0)
 
 ### Added
 
 - (PA-5722) Add frozen string magic comment  [#61](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/61) ([mhashizume](https://github.com/mhashizume))
-
-### Other
-
-- (PA-5722) Update to PDK template 2.7.5 [#62](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/62) ([mhashizume](https://github.com/mhashizume))
 
 ## [v1.3.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.3.0) - 2023-02-14
 
