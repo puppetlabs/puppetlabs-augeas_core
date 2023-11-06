@@ -37,6 +37,9 @@
     },
     {
       "operatingsystem": "AlmaLinux"
+    },
+    {
+      "operatingsystem": "AIX"
     }
   ],
   "requirements": [
