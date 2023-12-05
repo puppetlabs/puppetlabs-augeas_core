@@ -40,6 +40,9 @@
     },
     {
       "operatingsystem": "AIX"
+    },
+    {
+      "operatingsystem": "Amazon"
     }
   ],
   "requirements": [
