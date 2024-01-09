@@ -8,8 +8,6 @@
       Enabled: false
     Style/NumericPredicate:
       Enabled: false
-    Style/SignalException:
-      Enabled: false
     Layout/HeredocIndentation:
       Enabled: false
     Layout/LineLength:
@@ -39,10 +37,6 @@ Gemfile:
       - gem: beaker-puppet
         from_env: BEAKER_PUPPET_VERSION
         version: '~> 1.22'
-      - gem: github_changelog_generator
-        version: '= 1.16.4'
-      - gem: concurrent-ruby
-        version: '= 1.1.10'
       - gem: async
         version: '~> 1'
       - gem: beaker-module_install_helper
