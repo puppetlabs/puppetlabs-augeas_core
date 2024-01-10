@@ -52,7 +52,7 @@ EOM
         on(host, '/usr/sbin/svcadm restart /system/ca-certificates')
         timeout = 60
         counter = 0
-        while on(host, 'svcs -x ca-certificates').output !~ %r{State: online}
+        until on(host, 'svcs -x ca-certificates').output.include?('State: online')
           raise 'ca-certificates services failed start up' if counter > timeout
           sleep 5
           counter += 5
