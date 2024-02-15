@@ -1,4 +1,5 @@
 require 'beaker-rspec'
+require 'beaker-puppet'
 require 'beaker/module_install_helper'
 require 'beaker/puppet_install_helper'
 require 'voxpupuli/acceptance/spec_helper_acceptance'
@@ -58,6 +59,7 @@ EOM
           counter += 5
         end
       end
+      hosts.each { |host| host[:type] = 'aio' }
       run_puppet_install_helper
       install_module_on(hosts)
       install_module_dependencies_on(hosts)
