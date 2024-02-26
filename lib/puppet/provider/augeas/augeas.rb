@@ -21,6 +21,8 @@ require 'puppet/util/package'
 require_relative '../../../puppet_x/augeas/util/parser'
 
 Puppet::Type.type(:augeas).provide(:augeas) do
+  desc 'The Augeas provider'
+
   include Puppet::Util
   include Puppet::Util::Diff
   include Puppet::Util::Package

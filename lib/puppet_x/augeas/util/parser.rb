@@ -30,7 +30,7 @@ module PuppetX::Augeas::Util::Parser
   # support the full quite of escape sequences that Ruby allows in
   # double-quoted strings.
   #
-  # @param [String] The string to be parsed.
+  # @param string [String] The string to be parsed.
   # @return [Array<String>] The parsed array elements, including handling any
   #   escape sequences.
   def parse_to_array(string)
