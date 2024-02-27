@@ -33,9 +33,11 @@ Gemfile:
         from_env: BEAKER_HOSTGENERATOR_VERSION
       - gem: beaker-rspec
         from_env: BEAKER_RSPEC_VERSION
+      # Prevent beaker-puppet from being installed on Ruby > 3.1 until beaker-puppet supports newer Rubies
       - gem: beaker-puppet
         from_env: BEAKER_PUPPET_VERSION
         version: '~> 3.0'
+        condition: Gem::Requirement.create('< 3.1.0').satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
       - gem: async
         version: '~> 1'
       - gem: beaker-module_install_helper
@@ -57,4 +59,5 @@ appveyor.yml:
 # We still use the Vox acceptance Rake task instead of Litmus
 Rakefile:
   requires:
-    - voxpupuli/acceptance/rake
+    - require: voxpupuli/acceptance/rake
+      conditional: Gem.loaded_specs.key? 'voxpupuli-acceptance'
