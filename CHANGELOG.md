@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v1.5.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.5.0) - 2024-02-27
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.4.1...v1.5.0)
+
+### Added
+
+- (PA-5575) Add Amazon to display support in Puppet forge [#70](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/70) ([shubhamshinde360](https://github.com/shubhamshinde360))
+- (PA-5538) Add AIX 7.3 to metadata.json on puppetlabs-augeas_core module [#67](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/67) ([skyamgarp](https://github.com/skyamgarp))
+
 ## [v1.4.1](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.4.1) - 2023-09-21
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.4.0...v1.4.1)
