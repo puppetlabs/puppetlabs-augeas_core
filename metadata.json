@@ -43,6 +43,9 @@
     },
     {
       "operatingsystem": "Amazon"
+    },
+    {
+      "operatingsystem": "Amazonfips"
     }
   ],
   "requirements": [
