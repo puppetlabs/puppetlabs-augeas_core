@@ -27,7 +27,7 @@ with Augeas to the new version.
 Assuming you want to work with Augeas, this is a description of how
 to perform Augeas changes using Puppet. Augeas itself is included in the puppet-agent package, so you don't need to install any extra packages to use it. The command-line utility `augtool` will be used to demonstrate things here, but it is not required to use Augeas within Puppet. On most Linux distributions, `augtool` can be found in a separate package.
 
-The basic usage for the Augeas resource type is in the [resource type reference](./types/augeas.html).
+The basic usage for the Augeas resource type is in the [resource type reference](../REFERENCE.md).
 
 The somewhat more important, and unfortunately complicated, part is
 figuring out what the tree for a file looks like so you can
@@ -604,7 +604,7 @@ resolv::conf { "resolvconf":
 }
 ```
 
-This template is stored at `modules/resolv/templates/resolvconf.erb` following the standard [module layout](./modules_fundamentals.html):
+This template is stored at `modules/resolv/templates/resolvconf.erb` following the standard [module layout](https://help.puppet.com/core//8/Content/PuppetCore/module_structure.htm):
 
 ``` erb
 <% if domain and not domain.empty? -%>
@@ -622,13 +622,13 @@ rm nameserver
 <% end -%>
 ```
 
-It's just using normal [Puppet ERB templating](./lang_template.html) techniques, except that the output is a set of commands for Augeas to parse instead of the config file itself (the provider then splits on newlines).  This example shows both simple conditionals and loops, testing the variables available passed into the define.
+It's just using normal [Puppet ERB templating](https://help.puppet.com/core//8/Content/PuppetCore/lang_template_erb.htm) techniques, except that the output is a set of commands for Augeas to parse instead of the config file itself (the provider then splits on newlines).  This example shows both simple conditionals and loops, testing the variables available passed into the define.
 
 Because this template is evaluated during catalog compilation, you unfortunately can't use "get" Augeas functions to retrieve values from the config file itself. If you need to do this, you can write [custom facts]({{facter}}/custom_facts.html) that use Augeas to read values.
 
 ### Dynamically adding numbered children -- libvirtd.conf: sasl_allowed_usernames_list
 
-Here is another example that uses [Puppet ERB templating](./lang_template.html) to populate an Augeas node's numbered children. Quoting from [https://github.com/hercules-team/augeas/wiki/Adding-nodes-to-the-tree](https://github.com/hercules-team/augeas/wiki/Adding-nodes-to-the-tree):
+Here is another example that uses [Puppet ERB templating](https://help.puppet.com/core//8/Content/PuppetCore/lang_template_erb.htm) to populate an Augeas node's numbered children. Quoting from [https://github.com/hercules-team/augeas/wiki/Adding-nodes-to-the-tree](https://github.com/hercules-team/augeas/wiki/Adding-nodes-to-the-tree):
 
 > For nodes whose children are numbered sequentially (like the children of `/files/etc/hosts`), you need to invent a new label for the new child. You can either try to find out how many children `/files/etc/hosts` actually has, and then use the next number in the sequence. A much simpler way to generate a new unique numbered label is to use numbers that start with 0; since Augeas treats labels as strings, 01 and 1 are different, and since it will never use such a label, it's guaranteed to be unique:
 
