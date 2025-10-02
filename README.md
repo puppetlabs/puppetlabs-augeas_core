@@ -53,7 +53,7 @@ augeas { 'add_services_entry':
 <a id="usage"></a>
 ## Usage
 
-Please see REFERENCE.md for the reference documentation and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html) for details on usage.
+Please see REFERENCE.md for the reference documentation and [examples](documentation/examples.md) for details on usage.
 
 <a id="reference"></a>
 ## Reference
