@@ -1046,6 +1046,9 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
     end
 
     it "alsoes load lenses from pluginsync'd path" do
+      # Puppet must be in agent mode for this test to successfully
+      # complete
+      allow(Puppet).to receive(:run_mode).and_return(Puppet::Util::UnixRunMode.new(:agent))
       Puppet[:libdir] = my_fixture_dir
 
       aug = provider.open_augeas
