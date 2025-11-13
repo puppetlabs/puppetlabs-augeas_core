@@ -88,7 +88,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
       sc = StringScanner.new(line)
       cmd = sc.scan(%r{\w+|==|!=})
       formals = COMMANDS[cmd]
-      raise(_('Unknown command %{cmd}') % { cmd: cmd }) unless formals
+      raise(_('Unknown command %{cmd}') % { cmd: }) unless formals
       argline << cmd
       narg = 0
       formals.each do |f|
@@ -112,7 +112,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           len = sc.pos - start
           len -= 1 unless sc.eos?
           p = sc.string[start, len]
-          raise(_('missing path argument %{narg} for %{cmd}') % { narg: narg, cmd: cmd }) if p.nil?
+          raise(_('missing path argument %{narg} for %{cmd}') % { narg:, cmd: }) if p.nil?
 
           # Rip off any ticks if they are there.
           p = p[1, (p.size - 2)] if p[0, 1] == "'" || p[0, 1] == '"'
@@ -138,12 +138,12 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           else
             argline << sc.scan(%r{[^\s]+})
           end
-          raise(_('missing string argument %{narg} for %{cmd}') % { narg: narg, cmd: cmd }) unless argline[-1]
+          raise(_('missing string argument %{narg} for %{cmd}') % { narg:, cmd: }) unless argline[-1]
         elsif f == :comparator
           argline << sc.scan(%r{(==|!=|=~|<=|>=|<|>)})
           unless argline[-1]
             puts sc.rest
-            raise(_('invalid comparator for command %{cmd}') % { cmd: cmd })
+            raise(_('invalid comparator for command %{cmd}') % { cmd: })
           end
         elsif f == :int
           argline << sc.scan(%r{\d+}).to_i
@@ -270,7 +270,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
 
     # Get the match paths from augeas
     result = @aug.match(path) || []
-    raise(_("Error trying to get path '%{path}'") % { path: path }) if result == -1
+    raise(_("Error trying to get path '%{path}'") % { path: }) if result == -1
 
     # Get the values of the match paths from augeas
     values = result.map { |r| @aug.get(r) }
@@ -318,7 +318,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
 
     # Get the values from augeas
     result = @aug.match(path) || []
-    raise(_("Error trying to match path '%{path}'") % { path: path }) if result == -1
+    raise(_("Error trying to match path '%{path}'") % { path: }) if result == -1
 
     # Now do the work
     case verb
@@ -440,7 +440,7 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           when 'match' then return_value = process_match(cmd_array)
           end
         rescue StandardError => e
-          raise(_("Error sending command '%{command}' with params %{param}/%{message}") % { command: command, param: cmd_array[1..-1].inspect, message: e.message })
+          raise(_("Error sending command '%{command}' with params %{param}/%{message}") % { command:, param: cmd_array[1..-1].inspect, message: e.message })
         end
       end
 
@@ -518,37 +518,37 @@ Puppet::Type.type(:augeas).provide(:augeas) do
         when 'set'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.set(cmd_array[0], cmd_array[1])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
         when 'setm'
           if aug.respond_to?(command)
             debug("sending command '#{command}' with params #{cmd_array.inspect}")
             rv = aug.setm(cmd_array[0], cmd_array[1], cmd_array[2])
-            raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) if rv == -1
+            raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) if rv == -1
           else
-            raise(_("command '%{command}' not supported in installed version of ruby-augeas") % { command: command })
+            raise(_("command '%{command}' not supported in installed version of ruby-augeas") % { command: })
           end
         when 'rm', 'remove'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.rm(cmd_array[0])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) if rv == -1
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) if rv == -1
         when 'clear'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.clear(cmd_array[0])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
         when 'clearm'
           # Check command exists ... doesn't currently in ruby-augeas 0.4.1
           if aug.respond_to?(command)
             debug("sending command '#{command}' with params #{cmd_array.inspect}")
             rv = aug.clearm(cmd_array[0], cmd_array[1])
-            raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+            raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
           else
-            raise(_("command '%{command}' not supported in installed version of ruby-augeas") % { command: command })
+            raise(_("command '%{command}' not supported in installed version of ruby-augeas") % { command: })
           end
         when 'touch'
           debug("sending command '#{command}' (match, set) with params #{cmd_array.inspect}")
           if aug.match(cmd_array[0]).empty?
             rv = aug.clear(cmd_array[0])
-            raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+            raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
           end
         when 'insert', 'ins'
           label = cmd_array[0]
@@ -557,31 +557,31 @@ Puppet::Type.type(:augeas).provide(:augeas) do
           case where
           when 'before' then before = true
           when 'after' then before = false
-          else raise(_("Invalid value '%{where}' for where param") % { where: where })
+          else raise(_("Invalid value '%{where}' for where param") % { where: })
           end
           debug("sending command '#{command}' with params #{[label, where, path].inspect}")
           rv = aug.insert(path, label, before)
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) if rv == -1
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) if rv == -1
         when 'defvar'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.defvar(cmd_array[0], cmd_array[1])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
         when 'defnode'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.defnode(cmd_array[0], cmd_array[1], cmd_array[2])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) unless rv
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) unless rv
         when 'mv', 'move'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.mv(cmd_array[0], cmd_array[1])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) if rv == -1
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) if rv == -1
         when 'rename'
           debug("sending command '#{command}' with params #{cmd_array.inspect}")
           rv = aug.rename(cmd_array[0], cmd_array[1])
-          raise(_("Error sending command '%{command}' with params %{params}") % { command: command, params: cmd_array.inspect }) if rv == -1
-        else raise(_("Command '%{command}' is not supported") % { command: command })
+          raise(_("Error sending command '%{command}' with params %{params}") % { command:, params: cmd_array.inspect }) if rv == -1
+        else raise(_("Command '%{command}' is not supported") % { command: })
         end
       rescue StandardError => e
-        raise(_("Error sending command '%{command}' with params %{params}/%{message}") % { command: command, params: cmd_array.inspect, message: e.message })
+        raise(_("Error sending command '%{command}' with params %{params}/%{message}") % { command:, params: cmd_array.inspect, message: e.message })
       end
     end
   end
