@@ -86,15 +86,15 @@ describe augeas do
   describe 'provider interaction' do
     it 'returns 0 if it does not need to run' do
       provider = instance_double('Puppet::Provider::Augeas', need_to_run?: false)
-      resource = instance_double('Puppet::Type::Augeas', provider: provider, line: nil, file: nil)
-      changes = augeas.attrclass(:returns).new(resource: resource)
+      resource = instance_double('Puppet::Type::Augeas', provider:, line: nil, file: nil)
+      changes = augeas.attrclass(:returns).new(resource:)
       expect(changes.retrieve).to eq(0)
     end
 
     it 'returns :need_to_run if it needs to run' do
       provider = instance_double('Puppet::Provider::Augeas', need_to_run?: true)
-      resource = instance_double('Puppet::Type::Augeas', provider: provider, line: nil, file: nil)
-      changes = augeas.attrclass(:returns).new(resource: resource)
+      resource = instance_double('Puppet::Type::Augeas', provider:, line: nil, file: nil)
+      changes = augeas.attrclass(:returns).new(resource:)
       expect(changes.retrieve).to eq(:need_to_run)
     end
   end

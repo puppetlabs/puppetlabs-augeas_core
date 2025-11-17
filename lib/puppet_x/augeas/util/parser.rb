@@ -8,22 +8,22 @@ module PuppetX::Augeas::Util; end
 
 # Container for helpers to parse user provided data contained in manifests.
 module PuppetX::Augeas::Util::Parser
-  TOKEN_ARRAY_CLOSE                 = %r{\s*\]\s*}.freeze
-  TOKEN_ARRAY_OPEN                  = %r{\s*\[\s*}.freeze
-  TOKEN_ARRAY_SEPARATOR             = %r{\s*,\s*}.freeze
-  TOKEN_CLOSE_CURLY                 = %r|}|.freeze
-  TOKEN_DOUBLE_QUOTE                = %r{"}.freeze
-  TOKEN_DOUBLE_QUOTE_ESCAPED_CHAR   = %r{\\(["\\abtnvfres0-7xu])}.freeze
-  TOKEN_DOUBLE_QUOTE_UNESCAPED_CHAR = %r{[^"\\]}.freeze
-  TOKEN_HEX_CHAR                    = %r{[0-9a-fA-F]{1,2}}.freeze
-  TOKEN_OCTAL_CHAR                  = %r{[0-7]{1,3}}.freeze
-  TOKEN_OPEN_CURLY                  = %r|{|.freeze
-  TOKEN_SINGLE_QUOTE                = %r{'}.freeze
-  TOKEN_SINGLE_QUOTE_ESCAPED_CHAR   = %r{\\(['\\])}.freeze
-  TOKEN_SINGLE_QUOTE_UNESCAPED_CHAR = %r{[^'\\]}.freeze
-  TOKEN_SPACE                       = %r{\s}.freeze
-  TOKEN_UNICODE_LONG_HEX_CHAR       = %r{[0-9a-fA-F]{1,6}}.freeze
-  TOKEN_UNICODE_SHORT_HEX_CHAR      = %r{[0-9a-fA-F]{4}}.freeze
+  TOKEN_ARRAY_CLOSE                 = %r{\s*\]\s*}
+  TOKEN_ARRAY_OPEN                  = %r{\s*\[\s*}
+  TOKEN_ARRAY_SEPARATOR             = %r{\s*,\s*}
+  TOKEN_CLOSE_CURLY                 = %r|}|
+  TOKEN_DOUBLE_QUOTE                = %r{"}
+  TOKEN_DOUBLE_QUOTE_ESCAPED_CHAR   = %r{\\(["\\abtnvfres0-7xu])}
+  TOKEN_DOUBLE_QUOTE_UNESCAPED_CHAR = %r{[^"\\]}
+  TOKEN_HEX_CHAR                    = %r{[0-9a-fA-F]{1,2}}
+  TOKEN_OCTAL_CHAR                  = %r{[0-7]{1,3}}
+  TOKEN_OPEN_CURLY                  = %r|{|
+  TOKEN_SINGLE_QUOTE                = %r{'}
+  TOKEN_SINGLE_QUOTE_ESCAPED_CHAR   = %r{\\(['\\])}
+  TOKEN_SINGLE_QUOTE_UNESCAPED_CHAR = %r{[^'\\]}
+  TOKEN_SPACE                       = %r{\s}
+  TOKEN_UNICODE_LONG_HEX_CHAR       = %r{[0-9a-fA-F]{1,6}}
+  TOKEN_UNICODE_SHORT_HEX_CHAR      = %r{[0-9a-fA-F]{4}}
 
   # Parse a string into the (nearly) equivalent Ruby array. This only handles
   # arrays with string members (double-, or single-quoted), and does not
