@@ -61,10 +61,10 @@ group :development do
   gem "beaker-abs", *location_for(ENV['BEAKER_ABS_VERSION'] || '~> 1.0')
   gem "beaker-hostgenerator", *location_for(ENV['BEAKER_HOSTGENERATOR_VERSION'] || '~> 2')
   gem "beaker-rspec"
-  gem "beaker-puppet", *location_for(ENV['BEAKER_PUPPET_VERSION'] || '~> 4.0') if Gem::Requirement.create('< 3.2.0').satisfied_by?(Gem::Version.new(RUBY_VERSION.dup))
-  gem "async", '~> 1',                                                                     require: false
+  gem "beaker-puppet", *location_for(ENV['BEAKER_PUPPET_VERSION'] || '~> 4.0')
   gem "beaker-module_install_helper",                                                      require: false
   gem "nokogiri",                                                                          require: false
+  gem "orchestrator_client", '< 0.7.1',                                                    require: false
 end
 group :development, :release_prep do
   gem "puppet-strings", '~> 4.0',         require: false
@@ -72,11 +72,11 @@ group :development, :release_prep do
   gem "puppet-blacksmith", '~> 7.0',      require: false
 end
 group :system_tests do
-  gem "puppet_litmus", '~> 2.0',        require: false, platforms: [:ruby, :x64_mingw] if !ENV['PUPPET_FORGE_TOKEN'].to_s.empty?
-  gem "puppet_litmus", '~> 1.0',        require: false, platforms: [:ruby, :x64_mingw] if ENV['PUPPET_FORGE_TOKEN'].to_s.empty?
-  gem "CFPropertyList", '< 3.0.7',      require: false, platforms: [:mswin, :mingw, :x64_mingw]
-  gem "serverspec", '~> 2.41',          require: false
-  gem "voxpupuli-acceptance", '~> 3.2', require: false
+  gem "puppet_litmus", '~> 2.0',   require: false, platforms: [:ruby, :x64_mingw] if !ENV['PUPPET_FORGE_TOKEN'].to_s.empty?
+  gem "puppet_litmus", '~> 1.0',   require: false, platforms: [:ruby, :x64_mingw] if ENV['PUPPET_FORGE_TOKEN'].to_s.empty?
+  gem "CFPropertyList", '< 3.0.7', require: false, platforms: [:mswin, :mingw, :x64_mingw]
+  gem "serverspec", '~> 2.41',     require: false
+  gem "voxpupuli-acceptance",      require: false
 end
 
 gems = {}
