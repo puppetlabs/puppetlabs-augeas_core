@@ -5,7 +5,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [v1.5.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.5.0) - 2024-02-27
+## [v2.0.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v2.0.0) - 2025-11-25
+
+[Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.5.0...v2.0.0)
+
+### Added
+
+- (PA-7215) Add Amazonfips as a supported platform [#85](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/85) ([shubhamshinde360](https://github.com/shubhamshinde360))
+
+### Other
+
+- (PA-7815) Update module with template 3.5.1 [#91](https://github.com/puppetlabs/puppetlabs-augeas_core/pull/91) ([tvpartytonight](https://github.com/tvpartytonight))
+
+## [v1.5.0](https://github.com/puppetlabs/puppetlabs-augeas_core/tree/v1.5.0) - 2024-02-28
 
 [Full Changelog](https://github.com/puppetlabs/puppetlabs-augeas_core/compare/v1.4.1...v1.5.0)
 
