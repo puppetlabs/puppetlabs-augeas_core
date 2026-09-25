@@ -424,7 +424,9 @@ Puppet::Type.type(:augeas).provide(:augeas) do
   end
 
   # Determines if augeas actually needs to run.
-  def need_to_run?
+  def need_to_run?(refreshing = false)
+    return false if resource[:refreshonly] == :true && !refreshing
+
     force = resource[:force]
     return_value = true
     begin
@@ -485,6 +487,9 @@ Puppet::Type.type(:augeas).provide(:augeas) do
   end
 
   def execute_changes
+    # The check closes the handle when force skips the trial save.
+    open_augeas
+
     # Workaround Augeas bug where changing the save mode doesn't trigger a
     # reload of the previously saved file(s) when we call Augeas#load
     @aug.match('/augeas/events/saved').each do |file|

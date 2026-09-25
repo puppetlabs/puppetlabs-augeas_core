@@ -33,7 +33,7 @@ describe augeas do
     end
 
     properties = [:returns]
-    params = [:name, :context, :onlyif, :changes, :root, :load_path, :type_check, :show_diff]
+    params = [:name, :context, :onlyif, :changes, :root, :load_path, :type_check, :show_diff, :refreshonly]
 
     properties.each do |property|
       it "has a #{property} property" do
@@ -96,6 +96,45 @@ describe augeas do
       resource = instance_double('Puppet::Type::Augeas', provider:, line: nil, file: nil)
       changes = augeas.attrclass(:returns).new(resource:)
       expect(changes.retrieve).to eq(:need_to_run)
+    end
+  end
+
+  describe 'refreshonly' do
+    let(:resource) { augeas.new(name: 'refresh_test', provider: :augeas) }
+
+    it 'defaults to false' do
+      expect(resource[:refreshonly]).to eq(:false)
+    end
+
+    [true, false, :true, :false, 'true', 'false'].each do |value|
+      it "accepts #{value.inspect}" do
+        resource[:refreshonly] = value
+        expect(resource[:refreshonly]).to eq(value.to_s.to_sym)
+      end
+    end
+
+    it 'rejects invalid values' do
+      expect { resource[:refreshonly] = 'yes' }.to raise_error(Puppet::Error)
+    end
+
+    [true, false].each do |value|
+      context "with refreshonly set to #{value}" do
+        before(:each) do
+          resource[:refreshonly] = value
+        end
+
+        it 'checks the provider before executing a refresh' do
+          expect(resource.provider).to receive(:need_to_run?).with(true).ordered.and_return(true)
+          expect(resource.provider).to receive(:execute_changes).ordered
+          resource.refresh
+        end
+
+        it 'does not execute a refresh when the provider check fails' do
+          expect(resource.provider).to receive(:need_to_run?).with(true).and_return(false)
+          expect(resource.provider).not_to receive(:execute_changes)
+          resource.refresh
+        end
+      end
     end
   end
 

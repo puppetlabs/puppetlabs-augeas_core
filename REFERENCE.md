@@ -67,6 +67,7 @@ The following parameters are available in the `augeas` type.
 * [`name`](#-augeas--name)
 * [`onlyif`](#-augeas--onlyif)
 * [`provider`](#-augeas--provider)
+* [`refreshonly`](#-augeas--refreshonly)
 * [`root`](#-augeas--root)
 * [`show_diff`](#-augeas--show_diff)
 * [`type_check`](#-augeas--type_check)
@@ -168,6 +169,18 @@ Default value: `''`
 
 The specific backend to use for this `augeas` resource. You will seldom need to specify this --- Puppet will usually
 discover the appropriate provider for your platform.
+
+##### <a name="-augeas--refreshonly"></a>`refreshonly`
+
+Valid values: `true`, `false`
+
+Whether to apply changes only when receiving a refresh event, for example
+through `notify`, `subscribe`, or `~>`. Ordering with `require` or `->` does
+not generate refresh events. The `onlyif` condition and the usual check for
+changes still apply on refresh. The `force` parameter does not override
+`refreshonly`.
+
+Default value: `false`
 
 ##### <a name="-augeas--root"></a>`root`
 
