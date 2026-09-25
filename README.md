@@ -55,6 +55,47 @@ augeas { 'add_services_entry':
 
 Please see REFERENCE.md for the reference documentation and [examples](https://puppet.com/docs/puppet/latest/resources_augeas.html) for details on usage.
 
+### Apply changes only on refresh
+
+Set `refreshonly => true` to apply changes only when a resource sends a refresh event using `~>`, `notify`, or `subscribe`.
+Ordering with `->` or `require` does not send an event.
+The default is `false`; `onlyif` still applies on refresh, and `force` does not override `refreshonly` or `onlyif`.
+
+This example uses a dedicated temporary directory and a sample services file, leaving `/etc/services` untouched.
+Create the directory with `mktemp -d /tmp/augeas-refreshonly.XXXXXX` and replace the path below with its output.
+
+```puppet
+$demo_dir = '/tmp/augeas-refreshonly.REPLACE_ME'
+
+# Seed the sample once; do not reset its content on subsequent runs.
+file { "${demo_dir}/services":
+  ensure  => file,
+  content => "ssh 22/tcp\n",
+  replace => false,
+}
+
+file { "${demo_dir}/trigger":
+  content => 'bar',
+} ~>
+augeas { 'add_services_entry_on_refresh':
+  incl        => "${demo_dir}/services",
+  lens        => 'Services.lns',
+  changes     => [
+    'ins service-name after service-name[last()]',
+    'set service-name[last()] "Doom"',
+    'set service-name[last()]/port "666"',
+    'set service-name[last()]/protocol "udp"',
+  ],
+  refreshonly => true,
+  require     => File["${demo_dir}/services"],
+}
+```
+
+The first run creates the trigger file and inserts one entry.
+The second run leaves the trigger unchanged, sends no event, and makes no Augeas changes.
+Changing the trigger's desired content sends a new event and inserts another entry.
+This example deliberately uses a non-idempotent insertion to demonstrate that `refreshonly` controls execution.
+
 <a id="reference"></a>
 ## Reference
 

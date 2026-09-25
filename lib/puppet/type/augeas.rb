@@ -140,6 +140,17 @@ Puppet::Type.newtype(:augeas) do
     defaultto false
   end
 
+  newparam(:refreshonly) do
+    desc "Whether to apply changes only when receiving a refresh event, for example
+      through `notify`, `subscribe`, or `~>`. Ordering with `require` or `->` does
+      not generate refresh events. The `onlyif` condition and the usual check for
+      changes still apply on refresh. The `force` parameter does not override
+      `refreshonly`."
+
+    newvalues(:true, :false)
+    defaultto :false
+  end
+
   newparam(:type_check) do
     desc 'Whether augeas should perform typechecking. Defaults to false.'
     newvalues(:true, :false)
@@ -204,5 +215,9 @@ Puppet::Type.newtype(:augeas) do
     def sync
       @resource.provider.execute_changes
     end
+  end
+
+  def refresh
+    property(:returns).sync if provider.need_to_run?(true)
   end
 end
