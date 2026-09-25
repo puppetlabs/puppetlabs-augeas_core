@@ -425,6 +425,47 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
       allow(provider).to receive(:get_augeas_version).and_return('0.3.5')
     end
 
+    context 'with refreshonly enabled' do
+      before(:each) do
+        resource[:refreshonly] = true
+      end
+
+      [true, false].each do |force|
+        it "skips normal evaluation without opening Augeas when force is #{force}" do
+          resource[:force] = force
+          expect(provider).not_to receive(:open_augeas)
+          expect(provider.need_to_run?).to eq(false)
+        end
+      end
+
+      it 'reports the property in sync without an event' do
+        expect(provider).not_to receive(:open_augeas)
+        expect(resource.property(:returns).retrieve).to eq(0)
+      end
+
+      it 'allows evaluation on refresh' do
+        expect(provider.need_to_run?(true)).to eq(true)
+      end
+
+      [true, false].each do |force|
+        it "still checks onlyif on refresh when force is #{force}" do
+          resource[:force] = force
+          resource[:onlyif] = 'match service-name size == 0'
+          allow(augeas).to receive(:match).with('service-name').and_return(['service-name'])
+          expect(provider.need_to_run?(true)).to eq(false)
+        end
+      end
+
+      it 'does not bypass the check for actual changes on refresh' do
+        resource[:changes] = []
+        allow(provider).to receive(:get_augeas_version).and_return('1.14.0')
+        allow(augeas).to receive(:set).with('/augeas/save', 'newfile')
+        allow(augeas).to receive(:save).and_return(true)
+        allow(augeas).to receive(:match).with('/augeas/events/saved').and_return([])
+        expect(provider.need_to_run?(true)).to eq(false)
+      end
+    end
+
     it 'handles no filters' do
       allow(augeas).to receive('match').and_return(['set', 'of', 'values'])
       expect(provider.need_to_run?).to eq(true)
@@ -721,6 +762,16 @@ describe Puppet::Type.type(:augeas).provider(:augeas) do
 
       provider.aug = augeas
       allow(provider).to receive(:get_augeas_version).and_return('0.3.5')
+    end
+
+    it 'reopens Augeas when the force check closed the handle' do
+      resource[:force] = true
+      resource[:changes] = []
+      expect(provider.need_to_run?).to eq(true)
+      expect(provider.aug).to be_nil
+      expect(provider).to receive(:open_augeas) { provider.aug = augeas }
+      expect(augeas).to receive(:save).and_return(true)
+      expect(provider.execute_changes).to eq(:executed)
     end
 
     it 'handles set commands' do
